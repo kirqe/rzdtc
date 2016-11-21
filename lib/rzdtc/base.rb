@@ -7,7 +7,7 @@ class Rzdtc::Base
   default_timeout 5
 
   def base_url
-    "/timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&tfl=3&checkSeats=1"
+    "/timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&tfl=3&dir=0&checkSeats=1"
   end
 
   def base_path
@@ -26,18 +26,10 @@ class Rzdtc::Base
     "Город не найден"
   end
 
-  def check_tickets(from, to, from_date, return_date = nil)
+  def check_tickets(from, to, from_date)
     code0 = get_city_id(from)
     code1 = get_city_id(to)
     from_date = Date.parse(from_date).strftime('%d.%m.%Y')
-
-    if return_date.nil?
-      return_date = Date.today.strftime('%d.%m.%Y')
-      rt = 0
-    else
-      return_date = Date.parse(return_date).strftime('%d.%m.%Y')
-      rt = 1
-    end
 
     # from station
     station0 = "&st0=#{URI.escape(from)}"
@@ -48,14 +40,9 @@ class Rzdtc::Base
     station1 = "&st1=#{URI.escape(to)}"
     station_code1 = "&code1=#{code1}"
 
-    # show trains back
-    is_returning = "&dir=#{rt}"
-    return_date = "&dt1=#{return_date}" unless return_date.nil?
-
     # first request to get rid and JSESSIONID
-    url1 = "#{base_url}#{is_returning}
-    #{station0}#{station_code0}#{date0}
-    #{station1}#{station_code1}#{return_date}".gsub(" ", "")
+    url1 = "#{base_url}#{station0}#{station_code0}#{date0}
+    #{station1}#{station_code1}".gsub(" ", "")
 
     resp = self.class.get(url1)
     session_id = resp.headers["set-cookie"].split(",")[2].match('\JSESSIONID=(.*);')[1]

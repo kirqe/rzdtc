@@ -2,7 +2,7 @@ require "rzdtc/version"
 require "rzdtc/base"
 
 module Rzdtc
-  def self.check_tickets(from, to, from_date, return_date = nil)
-    Rzdtc::Base.new.check_tickets(from, to, from_date, return_date = nil)
+  def self.check_tickets(from, to, date)
+    Rzdtc::Base.new.check_tickets(from, to, date)
   end
 end

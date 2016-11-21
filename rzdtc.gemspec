@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["kirqe"]
   spec.email         = ["railsr@yahoo.com"]
 
-  spec.summary       = "A gem for checking rzd tickets"
-  spec.description   = "A gem for checking rzd tickets"
+  spec.summary       = "Rzd tickets checker"
+  spec.description   = "Rzd tickets checker"
   spec.homepage      = "http://github.com/kirqe/rzdtc"
   spec.license       = "MIT"
 
