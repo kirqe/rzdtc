@@ -1,4 +1,5 @@
 require 'httparty'
+require 'active_support/core_ext/string/multibyte'
 
 class Rzdtc::Base
   include HTTParty
@@ -14,6 +15,7 @@ class Rzdtc::Base
   end
 
   def get_city_id(city)
+    city = city.mb_chars.upcase.to_s
     url = "http://rzd.ru/suggester?stationNamePart=#{URI.escape(city)}\
           &lang=ru&lat=0&compactMode=y"
 
@@ -23,18 +25,23 @@ class Rzdtc::Base
         return suggestion["c"]
       end
     end
-    "Город не найден"
+    nil
   end
 
-  def check_tickets(from, to, from_date)
+  def check_tickets(from, to, date)
     code0 = get_city_id(from)
     code1 = get_city_id(to)
-    from_date = Date.parse(from_date).strftime('%d.%m.%Y')
+    begin
+      date = Date.parse(date).strftime('%d.%m.%Y')
+    rescue ArgumentError
+      print "invalid date"
+      return
+    end
 
     # from station
     station0 = "&st0=#{URI.escape(from)}"
     station_code0 = "&code0=#{code0}"
-    date0 = "&dt0=#{from_date}"
+    date0 = "&dt0=#{date}"
 
     # to station
     station1 = "&st1=#{URI.escape(to)}"
@@ -44,7 +51,12 @@ class Rzdtc::Base
     url1 = "#{base_url}#{station0}#{station_code0}#{date0}
     #{station1}#{station_code1}".gsub(" ", "")
 
-    resp = self.class.get(url1)
+    begin
+      resp = self.class.get(url1)
+    rescue URI::InvalidURIError
+      print "URI must be ascii only"
+      return
+    end
     session_id = resp.headers["set-cookie"].split(",")[2].match('\JSESSIONID=(.*);')[1]
     rid = JSON.parse(resp.body)['rid']
 
@@ -52,6 +64,11 @@ class Rzdtc::Base
     url2 = url1 + "&rid=#{rid}"
     sleep(1)
     result = self.class.get(url2, headers: {"Cookie" => "JSESSIONID=#{session_id}"})
-    JSON.parse(result.body)["tp"][0]["list"]
+    data = JSON.parse(result.body)
+    if data['result'] == "Error"
+      []
+    else
+      data["tp"][0]["list"]
+    end
   end
 end
