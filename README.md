@@ -1,11 +1,11 @@
 # Rzdtc
 
-A gem for checking rzd tickets.
+Rzd tickets checker
 
 ## Usage
 
 ```
-Rzdtc.check_tickets('КРАСНОДАР', 'РОСТОВ', '23.11.2016', '24.11.2016')
+Rzdtc.check_tickets('КРАСНОДАР', 'РОСТОВ', '24.11.2016')
 ```
 
-[MIT License](http://opensource.org/licenses/MIT).
+[MIT License](https://github.com/kirqe/rzdtc/blob/master/LICENSE)
