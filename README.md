@@ -4,13 +4,15 @@ Rzd tickets checker
 
 ## Usage
 
-```
+```ruby
 Rzdtc.check_tickets('КРАСНОДАР', 'РОСТОВ', '24.11.2016')
 ```
 
-```
+```ruby
 Rzdtc.check_tickets('КРАСНОДАР', 'РОСТОВ', '24.11.2016').first
-# => [
+
+# =>
+[
   {"date0"=>"24.11.2016", "varPrice"=>true,
   "date1"=>"24.11.2016", "time0"=>"01:33", "time1"=>"06:04",
   "trDate0"=>"23.11.2016", "trTime0"=>"14:00",
@@ -18,7 +20,7 @@ Rzdtc.check_tickets('КРАСНОДАР', 'РОСТОВ', '24.11.2016').first
   "route1"=>"МОСКВА КАЗ", "number"=>"306С",
   "number2"=>"306С", "typeEx"=>"0", "elReg"=>false,
   "uid"=>"306SJ_1479940380000_1479956640000", "train_id"=>"0",
-  "bEntire"=>false, "carrier"=>"ФПК", "type"=>"0", "station0"=>"КРАСНОДАР",
+  "bEntire"=>false, "carrier"=>"ФПК", "type"=>"0","station0"=>"КРАСНОДАР",
   "station1"=>"РОСТОВ", "timeInWay"=>"04:31", "flMsk"=>"3",
   "cars"=>[
     {"freeSeats"=>"24", "itype"=>"4", "servCls"=>"2Л",
