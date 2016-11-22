@@ -32,9 +32,8 @@ class Rzdtc::Base
     code0 = get_city_id(from)
     code1 = get_city_id(to)
     begin
-      date = Date.parse(date).strftime('%d.%m.%Y')
-    rescue ArgumentError
-      print "invalid date"
+      date = Date.parse(date.to_s).strftime('%d.%m.%Y')
+    rescue ArgumentError, 'invalid date'
       return
     end
 
