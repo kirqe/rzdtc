@@ -52,8 +52,7 @@ class Rzdtc::Base
 
     begin
       resp = self.class.get(url1)
-    rescue URI::InvalidURIError
-      print "URI must be ascii only"
+    rescue URI::InvalidURIError, 'URI must be ascii only'
       return
     end
     session_id = resp.headers["set-cookie"].split(",")[2].match('\JSESSIONID=(.*);')[1]
