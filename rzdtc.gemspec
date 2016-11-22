@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["railsr@yahoo.com"]
 
   spec.summary       = "Rzd tickets checker"
-  spec.description   = "Rzd tickets checker"
+  spec.description   = "A gem for checking rzd train tickets"
   spec.homepage      = "http://github.com/kirqe/rzdtc"
   spec.license       = "MIT"
 
@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "httparty", "~> 0.13.7"
   spec.add_development_dependency "activesupport", "~> 5.0"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", "~> 3.4.0"
 end

@@ -18,13 +18,6 @@ RSpec.describe Rzdtc::Base do
   end
 
   describe "def check_tickets(from, to, date)" do
-    context "when date is valid" do
-      it "returns a list of trains" do
-        data = Rzdtc::Base.new.check_tickets("МОСКВА", "РОСТОВ", Date.today + 3)
-        expect(data).to be_kind_of Array
-      end
-    end
-
     context "when date is not valid" do
       it "returns an empty list" do
         data = Rzdtc::Base.new.check_tickets("МОСКВА", "РОСТОВ", "")
