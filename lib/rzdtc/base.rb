@@ -7,11 +7,8 @@ class Rzdtc::Base
   base_uri 'https://pass.rzd.ru'
   default_timeout 5
 
-  def base_url
-    "/timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&tfl=3&dir=0&checkSeats=1"
-  end
-
   def base_path
+    "/timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&tfl=3&dir=0&checkSeats=1"
   end
 
   def get_city_id(city)
@@ -47,7 +44,7 @@ class Rzdtc::Base
     station_code1 = "&code1=#{code1}"
 
     # first request to get rid and JSESSIONID
-    url1 = "#{base_url}#{station0}#{station_code0}#{date0}
+    url1 = "#{base_path}#{station0}#{station_code0}#{date0}
     #{station1}#{station_code1}".gsub(" ", "")
 
     begin
