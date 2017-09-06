@@ -13,7 +13,7 @@ class Rzdtc::Base
 
   def get_city_id(city)
     city = city.mb_chars.upcase.to_s
-    url = "http://rzd.ru/suggester?stationNamePart=#{URI.escape(city)}\
+    url = "/suggester?stationNamePart=#{URI.escape(city)}\
           &lang=ru&lat=0&compactMode=y"
 
     suggestions = self.class.get(url)
